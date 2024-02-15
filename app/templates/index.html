@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Index</h1>
+
+    {% block content %}
+    {% endblock %}
+
+    <button><a href="{{ url_for('pagina_inicial')}}">Ir para a página inicial</a></button>
+</body>
+</html>
