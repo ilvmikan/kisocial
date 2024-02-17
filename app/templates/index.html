@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/index.css") }}" >
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
     <title>Página inicial</title>
 </head>
 <body>
     <h1>Index</h1>
 
+    {% if current_user.is_authenticated %}
+        <button><a href="{{ url_for('logout') }}">Logout</a></button>
+        <button><a href="{{ url_for('profile') }}">Profile</a></button>
+        <button><a href="{{ url_for('pagina_inicial') }}">Página inicial</a></button>
+    {% else %}
+        <button><a href="{{ url_for('login') }}">Login</a></button>
+        <button><a href="{{ url_for('register') }}">Register</a></button>
+    {% endif %}
 </body>
 </html>

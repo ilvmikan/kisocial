@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/profile.css") }}" >
     <title>Profile</title>
 </head>
 <body>
+    <h1>Profile page</h1>
+
+    <p>Nome de usuário: </p>
+    <p>Email: </p>
+
+
+    <button><a href="{{ url_for('pagina_inicial') }}">Página inicial</a></button>
+    <button><a href="{{ url_for('index') }}">Index</a></button>
 </body>
 </html>
