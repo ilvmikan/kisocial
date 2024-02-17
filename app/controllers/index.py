@@ -1,6 +1,11 @@
-from flask import render_template, request
-from app import app, db
+from flask import render_template, request, flash, redirect, url_for
+from flask_login import login_user, logout_user
+from app import app, db, login_manager
 from app.models.tables import User
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.filter_by(id=id).first()
 
 @app.route("/")
 @app.route("/index")
@@ -8,9 +13,29 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(username=username).first()
+
+        if user and user.password == password:
+            login_user(user)
+            flash('logando')
+            return redirect(url_for('pagina_inicial'))
+        else:
+            flash('login invalido')
+            
     return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash('logged out')
+    return redirect(url_for('index'))
+
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -40,9 +65,17 @@ def register():
     return render_template('register.html', msg=msg)
 
 
+
 @app.route("/pagina_inicial")
 def pagina_inicial():
     return render_template('pagina_inicial.html')
+
+
+
+@app.route("/profile")
+def profile():
+    return render_template('profile.html')
+
 
 
 @app.route("/teste/<info>")
@@ -62,7 +95,6 @@ def teste(info):
 # ##########        WARNING        ##########
 # ###########################################
 # ###########################################
-
 
 @app.route("/delete_all_users", methods=['GET'])
 def delete_all_users():
