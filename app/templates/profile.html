@@ -7,10 +7,17 @@
     <title>Profile</title>
 </head>
 <body>
-    <h1>Profile page</h1>
+    <a href="{{ url_for('editar_perfil')}}">EDITAR PERFIL</a>
+    <p>Perfil de {{ user.username }}</p>
+    <p>Nome: {{ user.name }}</p>
+    <p>Email: {{ user.email }}</p>
 
-    <p>Nome de usuário: </p>
-    <p>Email: </p>
+    {% if user.profile_picture %}
+        <img src="{{ url_for('static', filename='profile_pictures/' + user.profile_picture) }}" alt="Profile Picture">
+    {% else %}
+        <!-- Provide a default image or placeholder if profile_picture is None -->
+        <img src="{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}" alt="Default Profile Picture">
+    {% endif %}
 
 
     <button><a href="{{ url_for('pagina_inicial') }}">Página inicial</a></button>

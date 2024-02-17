@@ -7,27 +7,31 @@
     <title>Login</title>
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="POST" action="{{ url_for('login') }}">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required>
+    <div>
+      <h2>Login</h2>
+      <form method="POST" action="{{ url_for('login') }}">
+        {{ form.hidden_tag() }}
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" required>
+        {{ form.username.label }}
+        {{ form.username(class="form-control", placeholder="Enter your username") }}
 
-        <button type="submit">Login</button>
+        {{ form.password.label }}
+        {{ form.password(class="form-control", placeholder="Enter your password") }}
+
+        {{ form.submit(class="btn btn-primary") }}
+        <a href="{{ url_for('register') }}">Ainda não tem uma conta? Clique aqui.</a>
     </form>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          <ul class=flashes>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-          </ul>
-        {% endif %}
-    {% endwith %}
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+      {% endwith %}
+    </div>
 
-    <button><a href="{{ url_for('register') }}">Register</a></button>
 </body>
 </html>
