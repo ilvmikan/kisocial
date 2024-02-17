@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/login.css") }}" >
     <title>Login</title>
 </head>
 <body>
@@ -16,5 +17,17 @@
 
         <button type="submit">Login</button>
     </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+    {% endwith %}
+
+    <button><a href="{{ url_for('register') }}">Register</a></button>
 </body>
 </html>
