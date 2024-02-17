@@ -8,11 +8,12 @@
 </head>
 <body>
     <h1>Editar perfil</h1>
-    <form method="POST" action="{{ url_for('editar_perfil') }}">
+    <form method="POST" action="{{ url_for('editar_perfil') }}" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         {{ form.username.label }} {{ form.username() }}
         {{ form.name.label }} {{ form.name() }}
         {{ form.email.label }} {{ form.email() }}
+        {{ form.foto_perfil.label }} {{ form.foto_perfil() }}
         {{ form.submit() }}
     </form>
 

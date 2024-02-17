@@ -13,9 +13,8 @@
     <p>Email: {{ user.email }}</p>
 
     {% if user.profile_picture %}
-        <img src="{{ url_for('static', filename='profile_pictures/' + user.profile_picture) }}" alt="Profile Picture">
+        <img src="{{ url_for('static', filename='profile_pictures/users/' + user.profile_picture) }}" alt="Profile Picture">
     {% else %}
-        <!-- Provide a default image or placeholder if profile_picture is None -->
         <img src="{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}" alt="Default Profile Picture">
     {% endif %}
 
