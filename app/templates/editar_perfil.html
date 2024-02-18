@@ -13,11 +13,22 @@
         {{ form.username.label }} {{ form.username() }}
         {{ form.name.label }} {{ form.name() }}
         {{ form.email.label }} {{ form.email() }}
-        {{ form.foto_perfil.label }} {{ form.foto_perfil() }}
+        {{ form.foto_perfil.label }} 
+        {{ form.foto_perfil() }}
         {{ form.submit() }}
+
+        {% if user.profile_picture %}
+            <img width="250" height="250" src="{{ url_for('static', filename='profile_pictures/users/' + user.profile_picture) }}" alt="Profile Picture">
+        {% else %}
+            <img width="250" height="250" src="{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}" alt="Default Profile Picture">
+        {% endif %}
     </form>
 
     <button><a href="{{ url_for('pagina_inicial') }}">Página inicial</a></button>
     <button><a href="{{ url_for('index') }}">Index</a></button>
+
+    <script>
+        
+    </script>
 </body>
 </html>
