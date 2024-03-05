@@ -21,3 +21,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 from app.controllers import index
+from app.controllers import auth
+from app.controllers import profile
+from app.controllers import utils
+from app.controllers import posts
