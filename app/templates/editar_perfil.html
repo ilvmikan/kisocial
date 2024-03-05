@@ -1,20 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/profile.css") }}" >
-    <title>Profile</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
     <h1>Editar perfil</h1>
     <form method="POST" action="{{ url_for('editar_perfil') }}" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
-        {{ form.username.label }} {{ form.username() }}
-        {{ form.name.label }} {{ form.name() }}
-        {{ form.email.label }} {{ form.email() }}
-        {{ form.foto_perfil.label }} 
-        {{ form.foto_perfil() }}
+        
+        <div>
+            {{ form.username.label }}
+            {{ form.username() }}
+        </div>
+
+        <div>
+            {{ form.name.label }}
+            {{ form.name() }}
+        </div>
+
+        <div>
+            {{ form.email.label }}
+            {{ form.email() }}
+        </div>
+
+        <div>
+            {{ form.description.label }}
+            {{ form.description(maxlength=100) }} 
+            <p>Contagem de caracteres: <span id="charCount">0</span>/100</p> 
+        </div>
+
+        <div>
+            {{ form.foto_perfil.label }}
+            {{ form.foto_perfil() }}
+        </div>
+
         {{ form.submit() }}
 
         {% if user.profile_picture %}
@@ -24,11 +42,10 @@
         {% endif %}
     </form>
 
-    <button><a href="{{ url_for('pagina_inicial') }}">Página inicial</a></button>
-    <button><a href="{{ url_for('index') }}">Index</a></button>
-
     <script>
-        
+        document.getElementById("description").addEventListener("input", function() {
+            var charCount = document.getElementById("charCount");
+            charCount.textContent = this.value.length;
+        });
     </script>
-</body>
-</html>
+{% endblock %}

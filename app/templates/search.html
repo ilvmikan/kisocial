@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block title %}Pesquisa{% endblock %}
+
+{% block content %}
+    <h1>Pesquisa</h1>
+
+    <h2>Usuários encontrados</h2>
+    <ul>
+        {% if users_results %}
+            {% for user in users_results %}
+                <div style="border: 1px solid black;">
+                    <a href="{{ url_for('profile', username=user.username) }}">
+                        {% if user.profile_picture %}
+                            <img width="70px" height="70px" src="{{ url_for('static', filename='profile_pictures/users/' + user.profile_picture) }}" alt="Profile Picture">
+                        {% else %}
+                            <img width="70px" height="70px" src="{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}" alt="Default Profile Picture">
+                        {% endif %}
+                        <strong>Username:</strong> {{ user.username }}
+                    </a><br>
+                    <strong>Name:</strong> {{ user.name }}<br>
+                </div>
+                <br><br>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum usuário encontrado.</p>
+        {% endif %}
+    </ul>
+
+    <h2>Postagens encontradas</h2>
+    <ul>
+        {% if posts_results %}
+            {% for post in posts_results %}
+                <div style="border: 1px solid black;">
+                    <strong>Author:</strong> {{ post.user.username }}<br>
+                    <strong>Content:</strong> {{ post.content }}<br>
+                    <strong>Created at:</strong> {{ post.formatted_date() }}
+                </div>
+                <br><br>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum post encontrado.</p>
+        {% endif %}
+    </ul>
+{% endblock %}

@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/register.css") }}" >
-    <title>Registration Form</title>
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %}Registration Form{% endblock %}
+
+{% block content %}
     <div>
         <h2>Register</h2>
         <form action="{{ url_for('register') }}" method="post">
@@ -29,11 +24,8 @@
                 <p style="color: red;">{{ msg }}</p>
             {% endif %}
         
-            Já possuí uma conta?<a href="{{ url_for('login') }}">Login</a>
+            Já possui uma conta? <a href="{{ url_for('login') }}">Login</a>
             Voltar para o <a href="{{ url_for('index') }}">início</a>
         </form>             
     </div>
-
-
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename="css/layout.css")}}">
+    <title>{% block title %}Seu Título{% endblock %}</title>
+</head>
+<body>
+
+    <nav>
+        <div class="left-items">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('pagina_inicial') }}">Página inicial</a>
+            {% endif %}
+        </div>
+    
+        <div class="right-items">
+            {% if current_user.is_authenticated %}
+                <form method="POST" action="{{ url_for('search') }}">
+                    <input type="text" name="query" placeholder="Pesquisar">
+                    <button type="submit">Buscar</button>
+                </form>
+                <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('create_post') }}">Create post</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+    <hr>
+    
+
+    <div id="main-container">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

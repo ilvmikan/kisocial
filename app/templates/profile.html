@@ -1,25 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename="css/profile.css") }}" >
-    <title>Profile</title>
-</head>
-<body>
-    <a href="{{ url_for('editar_perfil')}}">EDITAR PERFIL</a>
-    <p>Perfil de {{ user.username }}</p>
-    <p>Nome: {{ user.name }}</p>
-    <p>Email: {{ user.email }}</p>
+{% extends 'layout.html' %}
+{% block title %}Perfil de {{ user.username }}{% endblock %}
 
-    {% if user.profile_picture %}
-        <img src="{{ url_for('static', filename='profile_pictures/users/' + user.profile_picture) }}" alt="Profile Picture">
-    {% else %}
-        <img src="{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}" alt="Default Profile Picture">
-    {% endif %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+    
+    <div id="div-profile">
+        <div id="div-items">
+            {% if user.profile_picture %}
+                <a {% if current_user == user %}href="{{ url_for('editar_perfil') }}"{% endif %}>
+                    <img class="pfp-profile" src="{{ url_for('static', filename='profile_pictures/users/' + user.profile_picture) }}" alt="Profile Picture">
+                </a>
+            {% else %}
+                <a {% if current_user == user %}href="{{ url_for('editar_perfil') }}"{% endif %}>
+                    <img class="pfp-profile" src="{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}" alt="Default Profile Picture">
+                </a>
+            {% endif %}
+            
+            <p class="profile-paragraph">
+                {% if current_user == user %}
+                    <a href="{{ url_for('editar_perfil') }}">{{ user.name }}</a>
+                {% else %}
+                    {{ user.name }}
+                {% endif %}
+            </p>
+            
+            <p class="profile-paragraph">
+                {% if current_user == user %}
+                    <a href="{{ url_for('editar_perfil') }}">@{{ user.username }}</a>
+                {% else %}
+                    @{{ user.username }}
+                {% endif %}
+            </p>
+            
+            {% if current_user == user %}
+                <p class="profile-paragraph">
+                    <a href="{{ url_for('editar_perfil') }}">{{ user.email }}</a>
+                </p>
+            {% endif %}
 
+            <p class="profile-paragraph">{{ user.description }}</p>
+        </div>
+    </div>
 
-    <button><a href="{{ url_for('pagina_inicial') }}">Página inicial</a></button>
-    <button><a href="{{ url_for('index') }}">Index</a></button>
-</body>
-</html>
+    <div id="posts-container">
+        <h1>Posts</h1>
+        
+        {% for post in user.posts %}
+            <div>
+                <p>{{ post.content }}</p>
+                <p>Postado em: {{ post.formatted_date() }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    
+
+{% endblock %}
