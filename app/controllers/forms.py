@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms import StringField, SubmitField, PasswordField
+from wtforms import StringField, SubmitField, PasswordField, TextAreaField
 from wtforms.validators import DataRequired, EqualTo
 
 class RegistrationForm(FlaskForm):
@@ -16,6 +16,7 @@ class EditProfileForm(FlaskForm):
     name = StringField('Name') 
     email = StringField('Email')
     foto_perfil = FileField('Foto de Perfil', validators=[FileAllowed(['jpg', 'png', 'jpeg', 'gif'])])
+    description = TextAreaField('Descrição do Perfil')
     submit = SubmitField('Submit')
 
 
