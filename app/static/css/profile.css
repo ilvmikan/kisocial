@@ -1,8 +1,45 @@
-body {
+* {
     margin: 0;
     padding: 0;
-    font-family: "Junge", cursive;
-    background: url('https://images.unsplash.com/photo-1611659934318-06fd70ced53c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-repeat: no-repeat;
-    background-size: cover;
+    font-family: "Monomaniac One", sans-serif;
+}
+
+#div-profile {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    margin-top: 40px;
+    margin-left: 60px;
+}
+
+#div-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.pfp-profile {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    border: 5px white solid;
+}
+
+.profile-paragraph {
+    font-size: 22px;
+    width: 200px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+
+
+#posts-container {
+    flex: 1; /* Ocupa o espaço disponível restante */
+    margin-left: 20px; /* Adiciona uma margem para separar das informações do perfil */
+}
+
+#posts-container h1 {
+    text-align: center; /* Centraliza o título */
 }
