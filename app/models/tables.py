@@ -1,4 +1,8 @@
 from app import db, login_manager
+from datetime import datetime, timezone
+import pytz
+
+
 
 class User(db.Model):
 
@@ -10,13 +14,18 @@ class User(db.Model):
     name = db.Column(db.String)
     email = db.Column(db.String, unique=True)
     profile_picture = db.Column(db.String(255))
+    description = db.Column(db.String(100), default="Não basta conquistar a sabedoria, é preciso usá-la")
 
-    def __init__(self, username, password, name, email, profile_picture=None):
+
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
+
+    def __init__(self, username, password, name, email, profile_picture=None, description=None):
         self.username = username
         self.password = password
         self.name = name
         self.email = email
         self.profile_picture = profile_picture 
+        self.description = description if description else "Não basta conquistar a sabedoria, é preciso usá-la"
 
     @property
     def is_authenticated(self):
@@ -41,14 +50,26 @@ class Post(db.Model):
     def __init__(self, content, user_id):
         self.content = content
         self.user_id = user_id
+        self.created_at = datetime.now(timezone.utc)
+
 
     __tablename__ = 'posts'
 
     id = db.Column(db.Integer, primary_key = True)
     content = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    user = db.relationship('User', foreign_keys=user_id) 
+    user = db.relationship('User', back_populates='posts', foreign_keys=user_id, overlaps="author")
+
+    def formatted_date(self):
+        now = datetime.utcnow()
+        delta = now - self.created_at
+
+        if delta.days == 0:
+            brasilia_tz = pytz.timezone('America/Sao_Paulo')
+            today_at_brasilia = self.created_at.replace(tzinfo=pytz.UTC).astimezone(brasilia_tz)
+            return f'Hoje às {today_at_brasilia.strftime("%H:%M")} (Horário de Brasília)'
 
     def __repr__(self):
         return "<Post %r>" % self.id
