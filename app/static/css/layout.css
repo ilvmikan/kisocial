@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: #1E1E1E;
+}
+
+nav {
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+    gap: 30xp;
+    font-family: "Monomaniac One", sans-serif;
+    font-size: 18px;
+    font-style: normal;
+}
+
+.left-items,
+.right-items {
+    display: flex;
+    gap: 40px;
+}
+
+nav a {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+nav form {
+    display: flex;
+    align-items: center;
+}

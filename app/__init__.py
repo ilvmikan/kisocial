@@ -25,3 +25,7 @@ from app.controllers import auth
 from app.controllers import profile
 from app.controllers import utils
 from app.controllers import posts
+
+#################################
+from app.controllers import admin
+#################################
