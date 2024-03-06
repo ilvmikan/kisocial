@@ -3,9 +3,9 @@ from flask_login import current_user, login_required
 from app import app, db
 from app.models.tables import User
 import os
-from .forms import EditProfileForm
+from app.controllers.forms import EditProfileForm
 from werkzeug.utils import secure_filename
-from .utils import allowed_file
+from app.controllers.utils import allowed_file
 
 
 @app.route("/profile/")
