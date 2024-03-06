@@ -17,15 +17,11 @@
             {{ form.submit(class="btn btn-primary") }}
             <a href="{{ url_for('register') }}">Ainda não tem uma conta? Clique aqui.</a>
         </form>
-
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class=flashes>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
     </div>
+    
+    {% if show_alert %}
+        <script>
+            window.alert("Login inválido.\nVerifique seu nome de usuário ou suas credenciais.");
+        </script>
+    {% endif %}
 {% endblock %}

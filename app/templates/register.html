@@ -8,24 +8,26 @@
         <form action="{{ url_for('register') }}" method="post">
             {{ form.hidden_tag() }}
         
-            {{ form.name(class="form-control", placeholder="Enter your name") }}
+            {{ form.name(class="form-control", placeholder="Nome") }}
         
-            {{ form.username(class="form-control", placeholder="Enter your username") }}
+            {{ form.username(class="form-control", placeholder="Nome de usuário") }}
 
-            {{ form.email(class="form-control", placeholder="Enter your email") }}
+            {{ form.email(class="form-control", placeholder="Email") }}
         
-            {{ form.password(class="form-control", placeholder="Enter your password") }}
+            {{ form.password(class="form-control", placeholder="Senha") }}
 
-            {{ form.confirm_password(class="form-control", placeholder="Confirm your password") }}
+            {{ form.confirm_password(class="form-control", placeholder="Confirme sua senha") }}
         
             {{ form.submit(class="btn btn-primary") }}
-        
-            {% if msg %}
-                <p style="color: red;">{{ msg }}</p>
-            {% endif %}
         
             Já possui uma conta? <a href="{{ url_for('login') }}">Login</a>
             Voltar para o <a href="{{ url_for('index') }}">início</a>
         </form>             
     </div>
+
+    {% if show_alert %}
+        <script>
+            window.alert("Nome de usuário ou email já existente.");
+        </script>
+    {% endif %}
 {% endblock %}
