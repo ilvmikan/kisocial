@@ -31,27 +31,5 @@ def search():
 
 
 
-@app.route("/delete_all_users", methods=['GET'])
-def delete_all_users():
-    try:
-        db.session.query(User).delete()
-        db.session.commit()
-
-        return "All user data deleted successfully."
-    except Exception as e:
-        db.session.rollback()
-        return f"Error deleting user data: {str(e)}"
-    
-
-@app.route("/delete_all_posts", methods=['GET'])
-def delete_all_posts():
-    try:
-        db.session.query(Post).delete()
-        db.session.commit()
-
-        return "All Posts data deleted successfully."
-    except Exception as e:
-        db.session.rollback()
-        return f"Error deleting user data: {str(e)}"
 
 
