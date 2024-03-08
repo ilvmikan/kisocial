@@ -14,7 +14,7 @@ class RegistrationForm(FlaskForm):
 class EditProfileForm(FlaskForm):
     username = StringField('Username')
     name = StringField('Name') 
-    email = StringField('Email', validators=[DataRequired()])
+    email = StringField('Email')
     foto_perfil = FileField('Foto de Perfil', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
     description = TextAreaField('Descrição do Perfil')
     submit = SubmitField('Submit')

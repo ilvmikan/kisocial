@@ -3,25 +3,25 @@
 {% block title %}Criar um post{% endblock %}
 
 {% block content %}
-    <h1>Página de posts</h1>
+<h1>Página de posts</h1>
 
-    <form action="{{ url_for('create_post') }}" method="post">
-        <label for="content">Conteúdo do Post:</label>
-        <textarea id="content" name="content" rows="4" cols="50" maxlength="255" required></textarea>
-        <p id="char-count">255 caracteres restantes</p>
+<form action="{{ url_for('create_post') }}" method="post">
+    <label for="content">Conteúdo do Post:</label>
+    <textarea id="content" name="content" rows="4" cols="50" maxlength="255" required></textarea>
+    <p id="char-count">255 caracteres restantes</p>
 
-        <br>
+    <br>
 
-        <button type="submit">Criar Post</button>
-    </form>
+    <button type="submit">Criar Post</button>
+</form>
 
-    <script>
-        const contentTextarea = document.getElementById('content');
-        const charCount = document.getElementById('char-count');
+<script>
+    const contentTextarea = document.getElementById('content');
+    const charCount = document.getElementById('char-count');
 
-        contentTextarea.addEventListener('input', function () {
-            const remainingChars = 255 - this.value.length;
-            charCount.textContent = `${remainingChars} caracter${remainingChars !== 1 ? 'es' : ''} restante${remainingChars !== 1 ? 's' : ''}`;
-        });
-    </script>
+    contentTextarea.addEventListener('input', function () {
+        const remainingChars = 255 - this.value.length;
+        charCount.textContent = `${remainingChars} caracter${remainingChars !== 1 ? 'es' : ''} restante${remainingChars !== 1 ? 's' : ''}`;
+    });
+</script>
 {% endblock %}

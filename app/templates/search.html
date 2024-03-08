@@ -3,43 +3,65 @@
 {% block title %}Pesquisa{% endblock %}
 
 {% block content %}
-    <h1>Pesquisa</h1>
-
-    <h2>Usuários encontrados</h2>
-    <ul>
-        {% if users_results %}
-            {% for user in users_results %}
-                <div style="border: 1px solid black;">
-                    <a href="{{ url_for('profile', username=user.username) }}">
-                        {% if user.profile_picture %}
-                            <img width="70px" height="70px" src="{{ url_for('static', filename='profile_pictures/users/' + user.profile_picture) }}" alt="Profile Picture">
-                        {% else %}
-                            <img width="70px" height="70px" src="{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}" alt="Default Profile Picture">
-                        {% endif %}
-                        <strong>Username:</strong> {{ user.username }}
-                    </a><br>
-                    <strong>Name:</strong> {{ user.name }}<br>
-                </div>
-                <br><br>
-            {% endfor %}
-        {% else %}
-            <p>Nenhum usuário encontrado.</p>
-        {% endif %}
-    </ul>
-
-    <h2>Postagens encontradas</h2>
-    <ul>
-        {% if posts_results %}
+<div class="flex justify-between m-14">
+    <div style="width: 60%;">
+        <ul>
+            <h1 class="text-center text-xl mt-2 font-bold
+            mb-2">POSTAGENS</h1>
+            {% if posts_results %}
             {% for post in posts_results %}
-                <div style="border: 1px solid black;">
-                    <strong>Author:</strong> {{ post.user.username }}<br>
-                    <strong>Content:</strong> {{ post.content }}<br>
-                    <strong>Created at:</strong> {{ post.formatted_date() }}
+
+            <div class="m-2 p-4 rounded-3xl shadow-xl flex items-start bg-white border border-gray-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                <img src="{% if post.user.profile_picture %}{{ url_for('static', filename='profile_pictures/users/' + post.user.profile_picture) }}{% else %}{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}{% endif %}" class="object-cover w-[150px] h-[150px] rounded-t-lg md:h-48 md:w-48 md:rounded-none md:rounded-s-lg flex-shrink-0" alt="">
+                <div class="p-4 max-h-[200px] overflow-hidden">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ post.user.username}}</h5>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400" style="word-wrap: break-word;">{{post.content }}</p>
                 </div>
-                <br><br>
+            </div>
+            <br>
             {% endfor %}
-        {% else %}
+
+            {% else %}
             <p>Nenhum post encontrado.</p>
+
+            {% endif %}
+        </ul>
+    </div>
+
+
+    <div>
+        {% if users_results %}
+        <ul>
+            <h1 class="text-center text-xl mt-2 mb-2">USUÁRIOS</h1>
+            {% for user in users_results %}
+            <li>
+                <a href="{{ url_for('profile', username=user.username) }}">
+
+                    <div class="rounded-3xl shadow-xl p-4 flex items-center">
+                        <div>
+                            <img class="h-20 w-20 flex-none rounded-full bg-gray-50" width="70px" height="70px"
+                                src="{% if user.profile_picture %}{{ url_for('static', filename='profile_pictures/users/' + user.profile_picture) }}{% else %}{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}{% endif %}"
+                                alt="{% if user.profile_picture %}Profile Picture{% else %}Default Profile Picture{% endif %}">
+                        </div>
+
+                        <div class="ml-2">
+                            <p class="text-sm font-semibold leading-6 text-gray-900 truncate">@{{ user.username }}</p>
+                            <p class="text-sm font-semibold leading-6 text-gray-900 truncate">{{ user.name }}</p>
+                            <div class="text-sm text-gray-900">
+                                Lorem ipsum dolor sit amet conseqdwqdwqwq
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            </li>
+            <br>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>Nenhum usuário encontrado.</p>
         {% endif %}
-    </ul>
+    </div>
+</div>
+
 {% endblock %}

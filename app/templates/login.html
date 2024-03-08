@@ -3,25 +3,51 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <div>
-        <h2>Login</h2>
-        <form method="POST" action="{{ url_for('login') }}">
+<div class="flex items-center mt-16 text-center">
+    <div
+        class="max-w-md mx-auto mt-4 p-6 bg-white border rounded-md shadow-md flex flex-col items-center border-solid border-2">
+        <h2 class="text-2xl font-semibold mb-4 text-center">Login</h2>
+        <form method="POST" action="{{ url_for('login') }}" class="w-full">
             {{ form.hidden_tag() }}
+            <div class="mb-4 w-full">
+                {{ form.username.label(class="block mb-2 text-sm font-medium text-gray-900 dark:text-white") }}
+                {{ form.username(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                placeholder="Nome de usuário") }}
+            </div>
 
-            {{ form.username.label }}
-            {{ form.username(class="form-control", placeholder="Enter your username") }}
+            <div class="mb-6 w-full">
+                {{ form.password.label(class="block mb-2 text-sm font-medium text-gray-900 dark:text-white") }}
+                {{ form.password(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+                dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+                placeholder="Senha") }}
+            </div>
 
-            {{ form.password.label }}
-            {{ form.password(class="form-control", placeholder="Enter your password") }}
+            <button type="submit"
+                class="w-full py-2 px-4 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium">
+                Login
+            </button>
 
-            {{ form.submit(class="btn btn-primary") }}
-            <a href="{{ url_for('register') }}">Ainda não tem uma conta? Clique aqui.</a>
+            <p class="text-center text-gray-500 mt-2">Ainda não tem uma conta? <a
+                    href="{{ url_for('register') }}">Clique aqui.</a></p>
         </form>
     </div>
-    
-    {% if show_alert %}
-        <script>
-            window.alert("Login inválido.\nVerifique seu nome de usuário ou suas credenciais.");
-        </script>
-    {% endif %}
+</div>
+
+
+
+
+
+
+
+
+
+
+{% if show_alert %}
+<script>
+    window.alert("Login inválido.\nVerifique seu nome de usuário ou suas credenciais.");
+</script>
+{% endif %}
 {% endblock %}

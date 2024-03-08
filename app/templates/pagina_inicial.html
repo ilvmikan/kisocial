@@ -3,18 +3,16 @@
 {% block title %}Página Inicial{% endblock %}
 
 {% block content %}
-    <h1>Página inicial</h1>
-
-    <h2>Posts Aleatórios</h2>
-    <ul>
-        {% for post in random_posts %}
-        <div style="border: 1px solid black;">
-            <strong>Author:</strong> {{ post.user.username }}<br>
-            <strong>Content:</strong> {{ post.content }}<br>
-            <strong>Created at:</strong> {{ post.formatted_date() }}
+<div class="p-4 mt-2 w-2/5">
+    {% for post in random_posts %}
+        <div class="m-4 p-4 rounded-3xl shadow-xl flex items-start bg-white border border-gray-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <img src="{% if post.user.profile_picture %}{{ url_for('static', filename='profile_pictures/users/' + post.user.profile_picture) }}{% else %}{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}{% endif %}" class="object-cover w-[150px] h-[150px] rounded-t-lg md:h-24 md:w-24 md:rounded-none md:rounded-s-lg flex-shrink-0" alt="">
+            <div class="p-4 max-h-[200px] overflow-hidden">
+                <h5 class="text-sm mb-2 font-bold tracking-tight text-gray-900 dark:text-white">{{ post.user.username}}</h5>
+                <p class="text-sm mb-3 font-normal text-gray-700 dark:text-gray-400" style="word-wrap: break-word;">{{post.content }}</p>
+            </div>
         </div>
-        <br><br>
-        {% endfor %}
-    </ul>
+    {% endfor %}
+</div>
 
 {% endblock %}

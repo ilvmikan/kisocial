@@ -27,7 +27,7 @@ def search():
         
         return render_template('search.html', users_results=users_results, posts_results=posts_results)
 
-    return render_template('search.html', users_results=None, posts_results=None)
+    return redirect(url_for('pagina_inicial'))
 
 
 

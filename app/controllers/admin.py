@@ -1,6 +1,16 @@
 from app import app, db
 from app.models.tables import User, Post
 
+@app.route("/help")
+def help():
+    commands = [
+        "/delete_all_users - Deleta todos os usuários",
+        "/delete_all_posts - Deleta todos os posts",
+        "/show_all_users - Mostra todos os usuários"
+    ]
+    return "<br>".join(commands)
+
+
 @app.route("/delete_all_users", methods=['GET'])
 def delete_all_users():
     try:
