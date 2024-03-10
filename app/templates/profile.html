@@ -5,44 +5,23 @@
 
 <div class="border border-solid border-black">
     <div>
-        {% if user.profile_picture %}
-        <a {% if current_user==user %}href="{{ url_for('editar_perfil') }}" {% endif %}>
-            <img
-                src="{{ url_for('static', filename='profile_pictures/users/' + user.profile_picture) }}"
-                alt="Profile Picture">
+        <img src="{{ url_for('static', filename='profile_pictures/' ~ ('users/' + user.profile_picture if user.profile_picture else 'default_profile_picture.jpg')) }}"
+        alt="{% if user.profile_picture %}Profile{% else %}Default Profile{% endif %} Picture">
         </a>
-        {% else %}
-        <a {% if current_user==user %}href="{{ url_for('editar_perfil') }}" {% endif %}>
-            <img
-                src="{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}"
-                alt="Default Profile Picture">
-        </a>
-        {% endif %}
 
-        <p>
-            {% if current_user == user %}
-            <a href="{{ url_for('editar_perfil') }}">{{ user.name }}</a>
-            {% else %}
-            {{ user.name }}
-            {% endif %}
-        </p>
-
-        <p>
-            {% if current_user == user %}
-            <a href="{{ url_for('editar_perfil') }}">@{{ user.username }}</a>
-            {% else %}
-            @{{ user.username }}
-            {% endif %}
-        </p>
-
-        {% if current_user == user %}
-        <p>
-            <a href="{{ url_for('editar_perfil') }}">{{ user.email }}</a>
-        </p>
-        {% endif %}
-
+        <p>{{ user.name }}</p>
+        <p>@{{ user.username }}</p>
+        <p>{{ user.email }}</p>
         <p>{{ user.description }}</p>
+        
     </div>
+
+    {% if current_user == user %}
+        <a href="{{ url_for('editar_perfil') }}">
+            <button>Editar perfil</button>
+        </a>
+    {% endif %}
+
 </div>
 
 <div>
@@ -55,6 +34,5 @@
     </div>
     {% endfor %}
 </div>
-
 
 {% endblock %}

@@ -3,16 +3,58 @@
 {% block title %}Página Inicial{% endblock %}
 
 {% block content %}
-<div class="p-4 mt-2 w-2/5">
-    {% for post in random_posts %}
-        <div class="m-4 p-4 rounded-3xl shadow-xl flex items-start bg-white border border-gray-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-            <img src="{% if post.user.profile_picture %}{{ url_for('static', filename='profile_pictures/users/' + post.user.profile_picture) }}{% else %}{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}{% endif %}" class="object-cover w-[150px] h-[150px] rounded-t-lg md:h-24 md:w-24 md:rounded-none md:rounded-s-lg flex-shrink-0" alt="">
-            <div class="p-4 max-h-[200px] overflow-hidden">
-                <h5 class="text-sm mb-2 font-bold tracking-tight text-gray-900 dark:text-white">{{ post.user.username}}</h5>
-                <p class="text-sm mb-3 font-normal text-gray-700 dark:text-gray-400" style="word-wrap: break-word;">{{post.content }}</p>
+
+
+<!-- FLEX | FLEX CONFIG | WIDTH - HEIGTH | BORDER | OTHERS  -->
+<div class="flex justify-between gap-5 h-screen">
+
+    <!-- MENU
+         WIDTH | MARGIN | BORDER | OTHERS -->
+    <div class="w-1/5 h-4/5 mt-8  border rounded-xl shadow-xl text-center bg-white" >
+        <ul>
+            <li class="text-base"><a href="">ULTIMOS POSTS</a></li>
+            <li class="text-base"><a href="">MAIS CURTIDOS</a></li>
+            <li class="text-base"><a href="">CONFIGURAÇÕES</a></li>
+        </ul>
+    </div>
+
+    <!-- POST
+         WIDTH | MARGIN | BORDER | OTHERS -->
+    <div class="w-3/6 h-2/5 mt-12 ">
+        {% for post in random_posts %}
+        <div class="p-4 border rounded-xl overflow-hidden shadow-xl bg-white">
+            <div class="flex">
+                <img src="{% if post.user.profile_picture %}{{ url_for('static', filename='profile_pictures/users/' + post.user.profile_picture) }}{% else %}{{ url_for('static', filename='profile_pictures/default_profile_picture.jpg') }}{% endif %}" alt="{{ post.user.username }} profile_picture" class="w-16 h-16 rounded-xl object-cover cursor-pointer">
+
+                <div class="flex-column p-2">
+                    <p class="text-sm cursor-pointer"><a href="{{ url_for('profile', username=post.user.username)}}">{{ post.user.name }}</a></p>
+                    <p class="text-sm cursor-pointer"><a href="{{ url_for('profile', username=post.user.username)}}">@{{ post.user.username }}</a></p>
+                </div>
+
+            </div>
+
+            <!-- POST -->
+            <p class="mt-2 text-sm">{{ post.content }}</p>
+            <br>
+            <div class="flex justify-between">
+                <p class="text-sm text-left">Curtidas: 12</p>
+                <p class="text-sm text-right">{{ post.formatted_date() }}</p>
             </div>
         </div>
-    {% endfor %}
-</div>
+        <br>
+        {% endfor %}
+    </div>
+    
 
+    <!-- AMIGOS
+        WIDTH | MARGIN | BORDER | OTHERS -->
+    <div class="w-1/5 h-4/5 mt-8 text-center bg-white border rounded-xl shadow-xl overflow-hidden">
+        <h1>AMIGOS</h1>
+        <div>
+            <img src="" alt="FOTO DE PERFIL DE USUARIO">
+            <p>NOME</p>
+            <p>@nomedeusuario</p>   
+        </div>
+    </div>
+</div>
 {% endblock %}

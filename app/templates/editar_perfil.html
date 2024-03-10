@@ -7,31 +7,15 @@
     <form method="POST" action="{{ url_for('editar_perfil') }}" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         
-        <div>
-            {{ form.username.label }}
-            {{ form.username() }}
-        </div>
-
-        <div>
-            {{ form.name.label }}
-            {{ form.name() }}
-        </div>
-
-        <div>
-            {{ form.email.label }}
-            {{ form.email() }}
-        </div>
-
-        <div>
-            {{ form.description.label }}
-            {{ form.description(maxlength=100) }} 
-            <p>Contagem de caracteres: <span id="charCount">0</span>/100</p> 
-        </div>
-
-        <div>
-            {{ form.foto_perfil.label }}
-            {{ form.foto_perfil() }}
-        </div>
+        {% for field in [form.username, form.name, form.email, form.description, form.foto_perfil] %}
+            <div>
+                {{ field.label }}
+                {{ field() }}
+                {% if field.name == 'description' %}
+                    <p>Contagem de caracteres: <span id="charCount">0</span>/100</p>
+                {% endif %}
+            </div>
+        {% endfor %}
 
         {{ form.submit() }}
 
