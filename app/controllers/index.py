@@ -12,7 +12,7 @@ def index():
 @app.route("/pagina_inicial")
 @login_required
 def pagina_inicial():
-    random_posts = Post.query.order_by(db.func.random()).limit(5).all()
+    random_posts = Post.query.order_by(db.func.random()).all()
 
     return render_template('pagina_inicial.html', random_posts=random_posts)
 
